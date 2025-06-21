@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import bookRoutes from './routes/book.route';
 import borrowRoutes from './routes/borrow.route';
-import { errorHandler } from "../src/middlewares/error.handler";
+import { errorHandler } from "./middlewares/error.handler";
 
 const app = express();
 

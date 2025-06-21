@@ -9,7 +9,8 @@ const db_1 = __importDefault(require("./config/db"));
 dotenv_1.default.config();
 const port = process.env.PORT || 5000;
 const bootstrap = async () => {
-    console.log('📡 Bootstrapping server...');
+    console.log('🚀 Bootstrapping server...');
+    console.log('MONGODB_URI:', process.env.MONGODB_URI);
     await (0, db_1.default)();
     app_1.default.listen(port, () => {
         console.log(`🚀 Server is running on port ${port}`);
