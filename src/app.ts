@@ -11,6 +11,10 @@ app.use(cors());
 app.use(express.json());
 
 
+app.get('/', (req, res) => {
+  res.send('Library Management API Running');
+});
+
 
 app.use('/api', bookRoutes);
 app.use('/api', borrowRoutes);
