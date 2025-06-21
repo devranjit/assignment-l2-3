@@ -44,21 +44,26 @@ export const getAllBooks = async (req: Request, res: Response, next: NextFunctio
 
 
 
-export const getBookById = async (req: Request, res: Response, next: NextFunction) => {
+export const getBookById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
-   const { id } = req.params;
-   const book = await Book.findById(id).select("-__v");
+    const { id } = req.params;
+    const book = await Book.findById(id).select('-__v');
 
     if (!book) {
-      return res.status(404).json({
+      res.status(404).json({
         success: false,
-        message: "Book not found",
+        message: 'Book not found',
       });
+      return;
     }
 
     res.status(200).json({
       success: true,
-      message: "Book retrieved successfully",
+      message: 'Book retrieved successfully',
       data: book,
     });
   } catch (err) {
@@ -104,28 +109,32 @@ export const updateBookById = async (
 };
 
 
-export const deleteBookById = async (req: Request, res: Response, next: NextFunction) => {
+export const deleteBookById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
   try {
-const { id: bookId } = req.params;
-const book = await Book.findByIdAndDelete(bookId);
+    const { id: bookId } = req.params;
+    const book = await Book.findByIdAndDelete(bookId);
 
     if (!book) {
-      return res.status(404).json({
+      res.status(404).json({
         success: false,
-        message: "Book not found",
+        message: 'Book not found',
       });
+      return;
     }
 
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
-      message: "Book deleted successfully",
-      data: null, 
+      message: 'Book deleted successfully',
+      data: null,
     });
   } catch (err) {
     next(err);
   }
 };
-
 
 export const borrowBook = async (
   req: Request,
