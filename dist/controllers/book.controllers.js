@@ -5,8 +5,11 @@ const book_model_1 = require("../models/book.model");
 const borrow_model_1 = require("../models/borrow.model");
 const createBook = async (req, res, next) => {
     try {
+        console.log("[API] Received POST /api/books");
+        console.log("[API] Request body:", req.body);
+        console.log("[API] Attempting Book.create...");
         const book = await book_model_1.Book.create(req.body);
-        console.log("✅ Book Created:", book);
+        console.log("✔️ Book created successfully:", book);
         res.status(201).json({
             success: true,
             message: "Book created successfully",
@@ -14,6 +17,7 @@ const createBook = async (req, res, next) => {
         });
     }
     catch (err) {
+        console.error("[API] Error during book creation:", err);
         next(err);
     }
 };

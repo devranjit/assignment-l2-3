@@ -3,16 +3,23 @@ import { Book } from '../models/book.model';
 import mongoose from "mongoose";
 import { Borrow } from '../models/borrow.model'; 
 
+
 export const createBook = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    console.log("[API] Received POST /api/books");
+    console.log("[API] Request body:", req.body);
+
+    console.log("[API] Attempting Book.create...");
     const book = await Book.create(req.body);
-    console.log("✅ Book Created:", book); 
+    console.log("✔️ Book created successfully:", book);
+
     res.status(201).json({
       success: true,
       message: "Book created successfully",
       data: book,
     });
   } catch (err) {
+    console.error("[API] Error during book creation:", err);
     next(err);
   }
 };
@@ -172,3 +179,6 @@ export const borrowBook = async (
     res.status(400).json({ success: false, message: error.message });
   }
 };
+
+
+
